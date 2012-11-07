@@ -159,6 +159,8 @@ public class ChooseFilesMenu extends JFrame {
 		statusBar.setBounds(0, 345, 548, 25);
 		contentPane.add(statusBar);
 		
+		/* one minor change */
+		
 		
 	}
 }
