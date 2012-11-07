@@ -3,7 +3,11 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
+
+import org.xml.sax.XMLFilter;
+
 import java.awt.event.*;
+import java.io.File;
 
 /**
  * Aceasta clasa descrie prima fereastra aparuta in interfata grafica.
@@ -19,6 +23,9 @@ public class ChooseFilesMenu extends JFrame {
 	private JTextField multipleXMLsField;
 	private JTextField hierarchyFileField;
 	private JTextField XMLfile;
+	private JFileChooser fcXML;
+	private JFileChooser fcXMLs;
+	private JFileChooser fcFile;
 
 	/**
 	 * Lansarea aplicatiei se face apeland main-ul
@@ -72,22 +79,70 @@ public class ChooseFilesMenu extends JFrame {
 		hierarchyFileField.setColumns(10);
 
 		/* Butonul care va selecta mai multe XML-uri ( cel din dreapta-sus ) */
+		fcXMLs = new JFileChooser();
+		MyXMLFilter filter = new MyXMLFilter();
+		fcXMLs.setFileFilter(filter);
+		fcXMLs.setMultiSelectionEnabled(true);
 		final JButton selectMultipleXMLs = new JButton("Select XMLs");
 		selectMultipleXMLs.setBounds(409, 51, 143, 25);
+		selectMultipleXMLs.setEnabled(false);
+		selectMultipleXMLs.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if( e.getSource()==selectMultipleXMLs ) {
+					int returnVal = fcXMLs.showOpenDialog(contentPane);
+					 if (returnVal == JFileChooser.APPROVE_OPTION) {
+			                File []files = fcXMLs.getSelectedFiles();
+			                for( int i=0; i<files.length; ++i ) {
+			                	System.out.println(files[i].getAbsolutePath());
+			                	multipleXMLsField.setText(files[i].getAbsolutePath());
+			                }
+			            }
+				}
+			}
+		});
 		contentPane.add(selectMultipleXMLs);
 
 		/* Butonul care va selecta binarul */
+		fcFile = new JFileChooser();
+		MyExecFilter execFilter = new MyExecFilter();
+		fcFile.setFileFilter(execFilter);
 		final JButton selectHierarchyFile = new JButton("Select file");
 		selectHierarchyFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if( e.getSource()==selectHierarchyFile ) {
+					int returnVal = fcFile.showOpenDialog(contentPane);
+					 if (returnVal == JFileChooser.APPROVE_OPTION) {
+			                File file = fcFile.getSelectedFile();
+			                hierarchyFileField.setText(file.getAbsolutePath());
+			            }
+				}
 			}
 		});
 		selectHierarchyFile.setBounds(409, 84, 143, 25);
+		selectHierarchyFile.setEnabled(false);
 		contentPane.add(selectHierarchyFile);
 
 		/* Butonul care va genera ( din XML-uri si binar ) XML-ul final */
 		final JButton generate = new JButton("Generate hierarchy file");
 		generate.setBounds(236, 116, 316, 25);
+		generate.setEnabled(false);
+		generate.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if( multipleXMLsField.getText()!=null && !multipleXMLsField.getText().equals("")
+						&& hierarchyFileField.getText()!=null && !hierarchyFileField.getText().equals("")){
+						JOptionPane.showMessageDialog(contentPane, "The file was generated.");
+				}
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Please Fill in all fields.");
+				}
+			}
+		});
 		contentPane.add(generate);
 
 		/* Butonul radio de jos ( care va selecta varianta cu XML final ) */
@@ -102,11 +157,29 @@ public class ChooseFilesMenu extends JFrame {
 		XMLfile.setColumns(10);
 
 		/* Butonul care va selecta fisierul XML final */
+		fcXML = new JFileChooser();
+		/* adaug un filtru la fileChooser; pot fi selectate numai fisiere XML */
+		fcXML.setFileFilter(filter);
 		final JButton selectXML = new JButton("Select XML");
 		selectXML.setBounds(409, 177, 143, 25);
+		selectXML.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if( e.getSource()==selectXML ) {
+					int returnVal = fcXML.showOpenDialog(contentPane);
+					 if (returnVal == JFileChooser.APPROVE_OPTION) {
+			                File file = fcXML.getSelectedFile();
+			                XMLfile.setText(file.getAbsolutePath());
+			            }
+				}
+			}
+		});
+		selectXML.setEnabled(false);
 		contentPane.add(selectXML);
 
-		/* add an action listener which allows only one JRadioButton to be selected at a time */
+		/* doar un singur JRadioButton poate fi selectat la un moment dat */
 		downRadioButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -116,6 +189,8 @@ public class ChooseFilesMenu extends JFrame {
 					upRadioButton.setSelected(false);
 					selectMultipleXMLs.setEnabled(false);
 					selectHierarchyFile.setEnabled(false);
+					multipleXMLsField.setText("");
+					hierarchyFileField.setText("");
 					generate.setEnabled(false);
 					selectXML.setEnabled(true);
 				}
@@ -127,7 +202,6 @@ public class ChooseFilesMenu extends JFrame {
 			}
 		});
 		
-		/* add an action listener which allows only one JRadioButton to be selected at a time */
 		upRadioButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -135,6 +209,7 @@ public class ChooseFilesMenu extends JFrame {
 				// TODO Auto-generated method stub
 				if( upRadioButton.isSelected()) {
 					downRadioButton.setSelected(false);
+					XMLfile.setText("");
 					selectMultipleXMLs.setEnabled(true);
 					selectHierarchyFile.setEnabled(true);
 					generate.setEnabled(true);
@@ -150,17 +225,32 @@ public class ChooseFilesMenu extends JFrame {
 		 * Butonul care va face sa apara ce-a de-a doua fereastra in care se vor
 		 * afla documentul descifrat si documentul in original
 		 */
-		JButton showHierarchy = new JButton("Show hierarchy");
+		final JButton showHierarchy = new JButton("Show hierarchy");
 		showHierarchy.setBounds(236, 224, 161, 25);
+		showHierarchy.setEnabled(true);
+		showHierarchy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if( XMLfile.getText()!=null && !XMLfile.getText().equals("")) {
+					JOptionPane.showMessageDialog(contentPane, "Single XML File.");
+				}
+				else if( multipleXMLsField.getText()!=null && !multipleXMLsField.getText().equals("")
+					&& hierarchyFileField.getText()!=null && !hierarchyFileField.getText().equals("")){
+					JOptionPane.showMessageDialog(contentPane, "Multiple XML Files");
+				}
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Error! Please fill in all fields.");
+				}
+			}
+		});
 		contentPane.add(showHierarchy);
 
 		/* Bara de status ( aflata in partea de jos a ferestrei ) */
 		JLabel statusBar = new JLabel("");
 		statusBar.setBounds(0, 345, 548, 25);
 		contentPane.add(statusBar);
-		
-		/* one minor change */
-		
 		
 	}
 }
