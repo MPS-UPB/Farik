@@ -93,11 +93,15 @@ public class ChooseFilesMenu extends JFrame {
 					int returnVal = fcXMLs.showOpenDialog(contentPane);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 						File[] files = fcXMLs.getSelectedFiles();
+						String allTheFiles = "";
 						for (int i = 0; i < files.length; ++i) {
+							System.out.println(i);
 							System.out.println(files[i].getAbsolutePath());
-							multipleXMLsField.setText(files[i]
-									.getAbsolutePath());
+							allTheFiles = allTheFiles + files[i].getAbsolutePath() ;
+							if ( i < files.length - 1)
+								allTheFiles += "; ";
 						}
+						multipleXMLsField.setText(allTheFiles);
 					}
 				}
 			}
@@ -227,25 +231,17 @@ public class ChooseFilesMenu extends JFrame {
 		 * afla documentul descifrat si documentul in original
 		 */
 		final JButton showHierarchy = new JButton("Show hierarchy");
+		final Frame frameTakeValues = new Frame();
+		frameTakeValues.setExtendedState(Frame.MAXIMIZED_BOTH);
 		showHierarchy.setBounds(236, 224, 161, 25);
 		showHierarchy.setEnabled(true);
 		showHierarchy.addActionListener(new ActionListener() {
-
+			TheEditor theEditor = new TheEditor(0,0,frameTakeValues.getWidth(), frameTakeValues.getHeight());
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (XMLfile.getText() != null && !XMLfile.getText().equals("")) {
-					JOptionPane.showMessageDialog(contentPane,
-							"Single XML File.");
-				} else if (multipleXMLsField.getText() != null
-						&& !multipleXMLsField.getText().equals("")
-						&& hierarchyFileField.getText() != null
-						&& !hierarchyFileField.getText().equals("")) {
-					JOptionPane.showMessageDialog(contentPane,
-							"Multiple XML Files");
-				} else {
-					JOptionPane.showMessageDialog(contentPane,
-							"Error! Please fill in all fields.");
-				}
+			public void actionPerformed(ActionEvent arg0) {				
+				theEditor.setVisible(true);
+				theEditor.setExtendedState(Frame.MAXIMIZED_BOTH);
+				theEditor.setExtendedState(Cursor.E_RESIZE_CURSOR);
 			}
 		});
 		contentPane.add(showHierarchy);

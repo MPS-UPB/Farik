@@ -4,12 +4,13 @@ import java.io.File;
 
 /**
  * Clasa contine metoda de obtinere a extensiei pentru un fisier.
- *
+ * 
  */
 public class UtilsExtension {
 
 	/**
-	 * Returneaza extensia fisierului. Pentru fisierele fara extensie se returneaza null.
+	 * Returneaza extensia fisierului. Pentru fisierele fara extensie se
+	 * returneaza null.
 	 */
 	public static String getExtension(File f) {
 		String ext = null;

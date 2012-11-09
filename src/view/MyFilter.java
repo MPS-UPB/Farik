@@ -32,6 +32,6 @@ public class MyFilter extends FileFilter {
 
 	@Override
 	public String getDescription() {
-		return ext;
+		return "." + ext;
 	}
 }
