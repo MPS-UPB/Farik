@@ -1,3 +1,0 @@
-Farik
-Andu commit!
-=====
