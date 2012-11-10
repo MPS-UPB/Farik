@@ -1,4 +1,14 @@
-/* NU IL VOM MAI FOLOSI. Probleme de nume */
+/*
+*
+NU IL VOM MAI FOLOSI. Probleme de nume 
+*
+CINE POATE SA IL STEARGA ... SA O FACA CU CURAJ
+)
+*
+*
+*
+*
+*/
 package view;
 
 import java.awt.*;
