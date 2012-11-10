@@ -1,3 +1,4 @@
+/* NU IL VOM MAI FOLOSI. Probleme de nume */
 package view;
 
 import java.awt.*;
