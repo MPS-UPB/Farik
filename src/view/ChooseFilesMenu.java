@@ -136,7 +136,6 @@ public class ChooseFilesMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				if (multipleXMLsField.getText() != null
 						&& !multipleXMLsField.getText().equals("")
 						&& hierarchyFileField.getText() != null
@@ -173,7 +172,6 @@ public class ChooseFilesMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if (e.getSource() == selectXML) {
 					int returnVal = fcXML.showOpenDialog(contentPane);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -191,7 +189,6 @@ public class ChooseFilesMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if (downRadioButton.isSelected()) {
 					upRadioButton.setSelected(false);
 					selectMultipleXMLs.setEnabled(false);
@@ -212,7 +209,6 @@ public class ChooseFilesMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if (upRadioButton.isSelected()) {
 					downRadioButton.setSelected(false);
 					XMLfile.setText("");

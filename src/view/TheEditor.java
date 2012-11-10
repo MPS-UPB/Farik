@@ -13,6 +13,7 @@ public class TheEditor extends JFrame {
 	 * Linie ceruta de Eclipse pentru serializare.
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 
 	// TODO : de facut pozitionarea absoluta a elementelor DINAMIC ( in functie
@@ -27,27 +28,30 @@ public class TheEditor extends JFrame {
 		contentPane.setLayout(null);
 
 		/* scroll-ul central ( care va derula simultan ambele ferestre ) */
-		JScrollPane CentralScroll = new JScrollPane();
-		CentralScroll.setBounds(378, 0, 22, 508);
-		contentPane.add(CentralScroll);
+		/* Va ramane de tip JScrollPane si se va corecta diagrama UML prin taierea clasei CentralScroll */
+		JScrollPane centralScroll = new JScrollPane();
+		centralScroll.setBounds(378, 0, 22, 508);
+		contentPane.add(centralScroll);
 
 		/* Panoul din partea stanga : documentul analizat */
-		JPanel ConvertedDocument = new JPanel();
-		ConvertedDocument.setBounds(12, 0, 366, 508);
-		contentPane.add(ConvertedDocument);
+		/* Acesta va deveni de tip ConvertedDocument */
+		JPanel convertedDocument = new JPanel();
+		convertedDocument.setBounds(12, 0, 366, 508);
+		contentPane.add(convertedDocument);
 
 		/* Panou din partea dreapta : documentul scanat */
-		JPanel ScannedDocument = new JPanel();
-		ScannedDocument.setBounds(402, 0, 366, 508);
-		contentPane.add(ScannedDocument);
+		/* Va deveni de tip ScannedDocument */
+		JPanel scannedDocument = new JPanel();
+		scannedDocument.setBounds(402, 0, 366, 508);
+		contentPane.add(scannedDocument);
 
 		/* buton de marire */
 		JButton zoomIn = new JButton("+");
-		ScannedDocument.add(zoomIn);
+		scannedDocument.add(zoomIn);
 
 		/* buton de micsorare */
 		JButton zoomOut = new JButton("-");
-		ScannedDocument.add(zoomOut);
+		scannedDocument.add(zoomOut);
 
 		/*
 		 * Scroll-ul din dreapta ecranului. Acesta regleaza doar pozitionarea in
