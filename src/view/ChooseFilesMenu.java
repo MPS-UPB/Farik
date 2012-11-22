@@ -228,11 +228,17 @@ public class ChooseFilesMenu extends JFrame {
 		 */
 		final JButton showHierarchy = new JButton("Show hierarchy");
 		final Frame frameTakeValues = new Frame();
+		frameTakeValues.setBounds(0, 0, 100, 200);
+		
+		System.out.println(frameTakeValues.getHeight());
 		frameTakeValues.setExtendedState(Frame.MAXIMIZED_BOTH);
+		System.out.println(frameTakeValues.getHeight());
+		
 		showHierarchy.setBounds(236, 224, 161, 25);
 		showHierarchy.setEnabled(true);
+		System.out.println(frameTakeValues.getSize().width +frameTakeValues.getSize().height  );
 		showHierarchy.addActionListener(new ActionListener() {
-			TheEditor theEditor = new TheEditor(0,0,frameTakeValues.getWidth(), frameTakeValues.getHeight());
+			TheEditor theEditor = new TheEditor(0,0,frameTakeValues.getSize().width, frameTakeValues.getSize().height);
 			@Override
 			public void actionPerformed(ActionEvent arg0) {				
 				theEditor.setVisible(true);
