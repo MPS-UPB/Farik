@@ -95,10 +95,9 @@ public class ChooseFilesMenu extends JFrame {
 						File[] files = fcXMLs.getSelectedFiles();
 						String allTheFiles = "";
 						for (int i = 0; i < files.length; ++i) {
-							System.out.println(i);
-							System.out.println(files[i].getAbsolutePath());
-							allTheFiles = allTheFiles + files[i].getAbsolutePath() ;
-							if ( i < files.length - 1)
+							allTheFiles = allTheFiles
+									+ files[i].getAbsolutePath();
+							if (i < files.length - 1)
 								allTheFiles += "; ";
 						}
 						multipleXMLsField.setText(allTheFiles);
@@ -229,18 +228,20 @@ public class ChooseFilesMenu extends JFrame {
 		final JButton showHierarchy = new JButton("Show hierarchy");
 		final Frame frameTakeValues = new Frame();
 		frameTakeValues.setBounds(0, 0, 100, 200);
-		
-		System.out.println(frameTakeValues.getHeight());
+
 		frameTakeValues.setExtendedState(Frame.MAXIMIZED_BOTH);
-		System.out.println(frameTakeValues.getHeight());
-		
+
 		showHierarchy.setBounds(236, 224, 161, 25);
 		showHierarchy.setEnabled(true);
-		System.out.println(frameTakeValues.getSize().width +frameTakeValues.getSize().height  );
+		System.out.println(frameTakeValues.getSize().width
+				+ frameTakeValues.getSize().height);
 		showHierarchy.addActionListener(new ActionListener() {
-			TheEditor theEditor = new TheEditor(0,0,frameTakeValues.getSize().width, frameTakeValues.getSize().height);
+			TheEditor theEditor = new TheEditor(0, 0,
+					frameTakeValues.getSize().width,
+					frameTakeValues.getSize().height);
+
 			@Override
-			public void actionPerformed(ActionEvent arg0) {				
+			public void actionPerformed(ActionEvent arg0) {
 				theEditor.setVisible(true);
 				theEditor.setExtendedState(Frame.MAXIMIZED_BOTH);
 				theEditor.setExtendedState(Cursor.E_RESIZE_CURSOR);

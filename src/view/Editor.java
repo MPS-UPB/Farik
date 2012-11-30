@@ -1,14 +1,14 @@
 /*
-*
+ *
 NU IL VOM MAI FOLOSI. Probleme de nume 
-*
+ *
 CINE POATE SA IL STEARGA ... SA O FACA CU CURAJ
 )
-*
-*
-*
-*
-*/
+ *
+ *
+ *
+ *
+ */
 package view;
 
 import java.awt.*;
@@ -27,18 +27,6 @@ public class Editor extends JFrame {
 	/**
 	 * Lanseaza ce-a de-a doua fereastra mare a aplicatiei ( zona de editare ).
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Editor frame = new Editor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Creaza cadrul.
