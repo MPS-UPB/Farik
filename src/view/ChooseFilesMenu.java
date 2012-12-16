@@ -78,7 +78,7 @@ public class ChooseFilesMenu extends JFrame {
 		hierarchyFileField.setColumns(10);
 
 		/* Butonul care va selecta mai multe XML-uri ( cel din dreapta-sus ) */
-		fcXMLs = new JFileChooser();
+		fcXMLs = new JFileChooser(".");
 		MyFilter filter = new MyFilter("xml");
 		fcXMLs.setFileFilter(filter);
 		fcXMLs.setMultiSelectionEnabled(true);
@@ -108,7 +108,7 @@ public class ChooseFilesMenu extends JFrame {
 		contentPane.add(selectMultipleXMLs);
 
 		/* Butonul care va selecta binarul */
-		fcFile = new JFileChooser();
+		fcFile = new JFileChooser(".");
 		MyFilter execFilter = new MyFilter("exe");
 		fcFile.setFileFilter(execFilter);
 		final JButton selectHierarchyFile = new JButton("Select file");
@@ -162,7 +162,7 @@ public class ChooseFilesMenu extends JFrame {
 		XMLfile.setColumns(10);
 
 		/* Butonul care va selecta fisierul XML final */
-		fcXML = new JFileChooser();
+		fcXML = new JFileChooser(".");
 		/* adaug un filtru la fileChooser; pot fi selectate numai fisiere XML */
 		fcXML.setFileFilter(filter);
 		final JButton selectXML = new JButton("Select XML");
