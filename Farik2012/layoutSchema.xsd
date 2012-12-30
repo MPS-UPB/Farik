@@ -1,0 +1,106 @@
+<?xml  version="1.0"  encoding="ISO-8859-1"  ?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType  name="DocumentType">
+      <xs:sequence  minOccurs="0"  maxOccurs="unbounded">
+          <xs:group  ref="BlockGroup"/>
+      </xs:sequence>
+      
+      <xs:attribute  name="image"  type="xs:string"  use="required"/>
+      <xs:attribute  name="direction"  type="DirType"  use="required"/>
+  </xs:complexType>
+  
+  <xs:simpleType  name="DirType">
+      <xs:restriction  base="xs:string">
+          <xs:enumeration  value="ascending"/>
+          <xs:enumeration  value="descending"/>
+      </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType  name="ImposedType">
+      <xs:restriction  base="xs:string">
+          <xs:enumeration  value="page_number"/>
+      </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType  name="fileType">
+      <xs:attribute  name="name"  type="xs:string"  use="required"/>
+  </xs:complexType>
+  
+  <xs:group  name="BlockGroup">
+      <xs:choice>
+          <xs:element  name="TextBlock"  type="TextBlockType"/>
+          <xs:element  name="ImageBlock"  type="ImageBlockType"/>
+          <xs:element  name="ComposedBlock"  type="ComposedBlockType"/>
+      </xs:choice>
+  </xs:group>
+  
+  <xs:complexType  name="PointType">
+      <xs:attribute  name="x"  type="xs:positiveInteger"/>
+      <xs:attribute  name="y"  type="xs:positiveInteger"/>
+  </xs:complexType>
+  
+  <xs:complexType  name="PolygonType">
+      <xs:sequence  minOccurs="3"  maxOccurs="unbounded">
+          <xs:element  name="Point"  type="PointType"/>
+      </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType  name="BlockType">
+      <xs:sequence  minOccurs="0"  maxOccurs="1">
+          <xs:element  name="Polygon"  type="PolygonType"/>
+      </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType  name="ComposedBlockType">
+      <xs:complexContent>
+          <xs:extension  base="BlockType">
+              <xs:sequence  minOccurs="1"  maxOccurs="1">
+                  <xs:element  name="TextBlock"/>
+              </xs:sequence>
+              
+              <xs:attribute  name="type"  type="ImposedType"  use="required"/>
+          </xs:extension>
+      </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType  name="ImageBlockType">
+      <xs:complexContent>
+          <xs:extension  base="BlockType">
+            <xs:attribute  name="left"  type="xs:positiveInteger"  use="required"/>
+              <xs:attribute  name="right"  type="xs:positiveInteger"  use="required"/>
+              <xs:attribute  name="top"  type="xs:positiveInteger"  use="required"/>
+              <xs:attribute  name="bottom"  type="xs:positiveInteger"  use="required"/>
+          </xs:extension>
+      </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType  name="TextBlockType">
+      <xs:complexContent>
+          <xs:extension  base="BlockType">
+              <xs:sequence  minOccurs="0">
+                  <xs:element  name="TextLine"  maxOccurs="unbounded">
+                      <xs:complexType>
+                          <xs:sequence>
+                              <xs:sequence  maxOccurs="unbounded">
+                                  <xs:element  name="String"  type="xs:string"/>
+                              </xs:sequence>
+                          </xs:sequence>
+              
+                          <xs:attribute  name="left"  type="xs:positiveInteger"  use="required"/>
+                          <xs:attribute  name="right"  type="xs:positiveInteger"  use="required"/>
+                          <xs:attribute  name="top"  type="xs:positiveInteger"  use="required"/>
+                          <xs:attribute  name="bottom"  type="xs:positiveInteger"  use="required"/>
+                      </xs:complexType>
+                  </xs:element>
+              </xs:sequence>
+              
+              <xs:attribute  name="left"  type="xs:positiveInteger"  use="required"/>
+              <xs:attribute  name="right"  type="xs:positiveInteger"  use="required"/>
+              <xs:attribute  name="top"  type="xs:positiveInteger"  use="required"/>
+              <xs:attribute  name="bottom"  type="xs:positiveInteger"  use="required"/>
+          </xs:extension>
+      </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element  name="Document"  type="DocumentType"/>
+</xs:schema>
