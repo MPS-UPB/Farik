@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document : capra1.xml
+    Creat la : 2012/11/13
+    Autor    : DOBRE Alexandru-Cristian
+    Validare : layoutSchema.xsd
+    Info     : pentru validare puteti folosi http://www.corefiling.com/opensource/schemaValidate.html
+-->
+
+<Document image="capra_cu_3_iezi_1.png" direction="descending">
+  <TextBlock left="278" right="555" top="15" bottom="38">
+    <TextLine left="278" right="555" top="15" bottom="38">
+      <String>CAPRA</String>
+      <String>CU</String>
+      <String>TREI</String>
+      <String>IEZI</String>
+    </TextLine>
+  </TextBlock>
+  
+  <TextBlock left="8" right="827" top="120" bottom="204">
+    <TextLine left="112" right="827" top="120" bottom="145">
+      <String>Era</String>
+      <String>odata</String>
+      <String>o</String>
+      <String>capra</String>
+      <String>care</String>
+      <String>avea</String>
+      <String>trei</String>
+      <String>iezi.</String>
+      <String>Iedul</String>
+      <String>cel</String>
+      <String>mare</String>
+      <String>si</String>
+      <String>cu</String>
+      <String>cel</String>
+      <String>mijlociu</String>
+      <String>dau</String>
+    </TextLine>
+    <TextLine left="8" right="827" top="146" bottom="175">
+      <String>prin</String>
+      <String>bat</String>
+      <String>de</String>
+      <String>obraznici</String>
+      <String>ce</String>
+      <String>erau;</String>
+      <String>iara</String>
+      <String>cel</String>
+      <String>mic</String>
+      <String>era</String>
+      <String>harnic</String>
+      <String>si</String>
+      <String>cuminte.</String>
+      <String>Vorba</String>
+      <String>ceea:</String>
+      <String>"Sunt</String>
+    </TextLine>
+    <TextLine left="8" right="543" top="178" bottom="204">
+      <String>cinci</String>
+      <String>degete</String>
+      <String>la</String>
+      <String>o</String>
+      <String>mana</String>
+      <String>si</String>
+      <String>nu</String>
+      <String>seamana</String>
+      <String>toate</String>
+      <String>unul</String>
+      <String>cu</String>
+      <String>altul".</String>
+    </TextLine>
+  </TextBlock>
+  
+</Document> 
