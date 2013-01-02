@@ -7,6 +7,12 @@ import javax.swing.border.*;
 import java.awt.event.*;
 import java.io.File;
 
+/*
+ * Momentan se incarca fisierul CEVA.xml si se va afisa imaginea CEVA.png.
+ * Pentru a fi mai usoara testarea deocamdata sunt niste chestii hardcodate. Trebuie
+ * revenit la cele vechi ( comentariile : DE FACUT si DE STERS de pe la linia 285 ) 
+ */
+
 /**
  * Aceasta clasa descrie prima fereastra aparuta in interfata grafica.
  */
@@ -66,7 +72,6 @@ public class ChooseFilesMenu extends JFrame {
 		upRadioButton.setForeground(Color.WHITE);
 		upRadioButton.setBorderPainted(false);
 		upRadioButton.setBorder(null);
-		upRadioButton.setToolTipText("upRadioButton");
 		contentPane.add(upRadioButton);
 
 		/*
@@ -77,25 +82,21 @@ public class ChooseFilesMenu extends JFrame {
 		multipleXMLsField.setBounds(236, 54, 161, 19);
 		contentPane.add(multipleXMLsField);
 		multipleXMLsField.setColumns(10);
-		multipleXMLsField.setToolTipText("multipleXMLsField");
 
 		/* Campul in care va aparea binarul */
 		hierarchyFileField = new JTextField();
 		hierarchyFileField.setBounds(236, 85, 161, 19);
 		contentPane.add(hierarchyFileField);
 		hierarchyFileField.setColumns(10);
-		hierarchyFileField.setToolTipText("hierarchyFileField");
 
 		/* Butonul care va selecta mai multe XML-uri ( cel din dreapta-sus ) */
 		fcXMLs = new JFileChooser(".");
 		MyFilter filter = new MyFilter("xml");
 		fcXMLs.setFileFilter(filter);
 		fcXMLs.setMultiSelectionEnabled(true);
-		fcXMLs.setToolTipText("fcXMLs");
 		final JButton selectMultipleXMLs = new JButton("Select XMLs");
 		selectMultipleXMLs.setBounds(409, 51, 143, 25);
 		selectMultipleXMLs.setEnabled(false);
-		selectMultipleXMLs.setToolTipText("selectMultipleXMLs");
 		selectMultipleXMLs.addActionListener(new ActionListener() {
 
 			@Override
@@ -122,7 +123,6 @@ public class ChooseFilesMenu extends JFrame {
 		fcFile = new JFileChooser(".");
 		MyFilter execFilter = new MyFilter("exe");
 		fcFile.setFileFilter(execFilter);
-		fcFile.setToolTipText("fcFile");
 		final JButton selectHierarchyFile = new JButton("Select file");
 		selectHierarchyFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -137,14 +137,12 @@ public class ChooseFilesMenu extends JFrame {
 		});
 		selectHierarchyFile.setBounds(409, 84, 143, 25);
 		selectHierarchyFile.setEnabled(false);
-		selectHierarchyFile.setToolTipText("selectHierarchyFile");
 		contentPane.add(selectHierarchyFile);
 
 		/* Butonul care va genera ( din XML-uri si binar ) XML-ul final */
 		final JButton generate = new JButton("Generate hierarchy file");
 		generate.setBounds(236, 116, 316, 25);
 		generate.setEnabled(false);
-		generate.setToolTipText("generate");
 		generate.addActionListener(new ActionListener() {
 
 			@Override
@@ -171,7 +169,6 @@ public class ChooseFilesMenu extends JFrame {
 		downRadioButton.setSelected(true);
 		downRadioButton.setForeground(Color.WHITE);
 		downRadioButton.setBackground(blueBack);
-		downRadioButton.setToolTipText("downRadioButton");
 		contentPane.add(downRadioButton);
 		contentPane.setBackground(blueBack);
 		contentPane.setToolTipText("contentPane");
@@ -181,7 +178,6 @@ public class ChooseFilesMenu extends JFrame {
 		XMLfile.setBounds(236, 180, 161, 19);
 		contentPane.add(XMLfile);
 		XMLfile.setColumns(10);
-		XMLfile.setToolTipText("XMLfile");
 		XMLfile.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
@@ -219,10 +215,8 @@ public class ChooseFilesMenu extends JFrame {
 		fcXML = new JFileChooser(".");
 		/* adaug un filtru la fileChooser; pot fi selectate numai fisiere XML */
 		fcXML.setFileFilter(filter);
-		fcXML.setToolTipText("fcXML");
 		final JButton selectXML = new JButton("Select XML");
 		selectXML.setBounds(409, 177, 143, 25);
-		selectXML.setToolTipText("selectXML");
 		selectXML.addActionListener(new ActionListener() {
 
 			@Override
@@ -283,7 +277,6 @@ public class ChooseFilesMenu extends JFrame {
 		 * afla documentul descifrat si documentul in original
 		 */
 		showHierarchy = new JButton("Show hierarchy");
-		showHierarchy.setToolTipText("showHierarchy");
 		final Frame frameTakeValues = new Frame();
 		frameTakeValues.setBounds(0, 0, 100, 200);
 
@@ -304,7 +297,7 @@ public class ChooseFilesMenu extends JFrame {
 				if (l > 4 && s.substring(l - 4, l).equals(".xml")) {
 					TheEditor theEditor = new TheEditor(s);
 					theEditor.setVisible(true);
-					theEditor.setBounds(0, 0, 1020, 690);
+					theEditor.setBounds(0, 0, 1024, 690);
 				} else {
 					JOptionPane.showMessageDialog(contentPane,
 							"Fill the box with the name of a xml file.");
