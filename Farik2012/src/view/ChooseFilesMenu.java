@@ -284,13 +284,13 @@ public class ChooseFilesMenu extends JFrame {
 
 		showHierarchy.setBounds(236, 224, 161, 25);
 		showHierarchy.setEnabled(true);
-		// DE FACUT FALSE MAI SUS -> la final showHierarchy.setEnabled(false);
+		// TODO : DE FACUT FALSE MAI SUS -> la final showHierarchy.setEnabled(false);
 		// !!!
 		showHierarchy.addActionListener(new ActionListener() {
 			/* se va deschide fereastra numarul 2 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				XMLfile.setText("capra1.xml"); // DE STERS LA FINAL !!!
+				XMLfile.setText("capra1.xml"); // TODO : DE STERS LA FINAL !!!
 				String s = XMLfile.getText();
 				int l = s.length();
 				/* daca fisierul este CEVA.xml este ok */

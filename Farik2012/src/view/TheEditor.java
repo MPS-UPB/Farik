@@ -56,7 +56,7 @@ public class TheEditor extends JFrame {
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-		// System.out.println(document.getDocumentElement().getAttribute("image"));
+
 		document.normalize();
 		afiseazaDOM(document);
 
@@ -65,12 +65,48 @@ public class TheEditor extends JFrame {
 		 * tag-urile care ne intereseaza pe noi
 		 */
 		Element root = document.getDocumentElement();
-		if ( root.hasChildNodes() == false ){	// nu avem niciun bloc
+		if (root.hasChildNodes() == false) { // nu avem niciun bloc
 			System.out.println("Documentul este gol.");
 		}
-		
-		
-		
+
+		System.out.println("\n");
+		// parcurg toti fii radacinii
+		Node sibling = root.getFirstChild();
+		while (sibling != null) {
+			// daca nu pun conditia de mai jos e obligatoriu ca xml-urile sa fie
+			// cu tag-uri lipite </tag1><tag2>
+			if (sibling.getNodeName().equals("#text") == false) {
+				// poate fi doar ComposedBlock sau TextBlock
+				System.out.println(sibling.getNodeName());
+				if (sibling.getNodeName().equals("ComposedBlock") == false) {
+					// TODO : se preiau valorile pentru a se pozitiona
+					// JComboBox-ul si JRadioButton-ul
+
+				} else {
+					// TODO : se preiau valorile pentru a se pozitiona
+					// JComboBox-ul si JRadioButton-ul
+
+					// TODO : i se creeza lui TextBlock un parinte ComposedBlock
+					// avand type="page_number"
+
+				}
+			}
+
+			sibling = sibling.getNextSibling();
+
+		}
+
+		// TODO : partea de afisare a JComboBox-urilor in functie de
+		// JRadioButton-ul selectat
+
+		// TODO : la modificarea unui JComboBox trebuie sa se modifice DOM-ul (
+		// type = <<ce s-a selectat>> in loc de type = "page_number" )
+
+		// TODO : se va crea un nou fisier ( nu se va suprascrie vechiul )
+		// continand DOM-ul ( se poate folosi metoda afiseazaDOM de mai jos cu
+		// mici adaptari ). Noul fisier va avea numele
+		// <<numele_vechi>>_corectat.xml
+
 		/* preluarea numelui pozei folosind numele xml-ului */
 		pozaScanata = s.substring(0, s.length() - 3) + "png"; // ceva.png
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
