@@ -1,0 +1,75 @@
+<Document image="3-sizes.tif" direction="descending">
+  <TextBlock left="13" right="1089" top="26" bottom="109">
+    <TextLine left="13" right="1089" top="26" bottom="109">
+      <String>Nato</String>
+      <String>setzt</String>
+	  <String>auf</String>
+	  <String>Diplomatie</String>
+    </TextLine>
+  </TextBlock>
+
+  <TextBlock left="13" right="1339" top="139" bottom="192">  
+    <TextLine left="13" right="1339" top="139" bottom="192">
+      <String>Solana:</String>
+	  <String>Militareinsatz</String>
+	  <String>wegen</String>
+	  <String>bla</String>
+	  <String>bla</String>
+    </TextLine>
+  </TextBlock>
+ 
+  <TextBlock left="13" right="702" top="257" bottom="499">
+    <TextLine left="44" right="702" top="257" bottom="298">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="13" right="702" top="300" bottom="338">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="13" right="702" top="338" bottom="378">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="13" right="702" top="379" bottom="420">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="13" right="702" top="422" bottom="458">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="13" right="702" top="459" bottom="499">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+  </TextBlock>
+  
+  <TextBlock left="738" right="1432" top="257" bottom="499">
+    <TextLine left="741" right="1432" top="257" bottom="298">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="739" right="1430" top="300" bottom="338">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="738" right="1432" top="338" bottom="378">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="739" right="1432" top="379" bottom="420">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="739" right="1432" top="422" bottom="458">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+	<TextLine left="739" right="1432" top="459" bottom="499">
+      <String>something</String>
+	  <String>something</String>
+    </TextLine>
+  </TextBlock>
+  
+</Document>

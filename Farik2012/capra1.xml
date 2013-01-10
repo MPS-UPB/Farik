@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Document image="capra1.png" direction="descending">
-	<ComposedBlock type="page_number">
+		<ComposedBlock type="page_number">
 	        <TextBlock left="278" right="555" top="15" bottom="38">
 		        <TextLine left="278" right="555" top="15" bottom="38">
 			        <String>CAPRA</String>
-				<String>CU</String>
-				<String>TREI</String>
-				<String>IEZI</String>
-			</TextLine>
-		</TextBlock>
+					<String>CU</String>
+					<String>TREI</String>
+					<String>IEZI</String>
+				</TextLine>
+			</TextBlock>
         </ComposedBlock>
 
 	<TextBlock left="8" right="827" top="120" bottom="204">

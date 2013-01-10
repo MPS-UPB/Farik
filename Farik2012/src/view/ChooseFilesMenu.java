@@ -3,9 +3,23 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.awt.event.*;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.StringWriter;
+import java.util.StringTokenizer;
 
 /*
  * Momentan se incarca fisierul CEVA.xml si se va afisa imaginea CEVA.png.
@@ -151,6 +165,7 @@ public class ChooseFilesMenu extends JFrame {
 						&& !multipleXMLsField.getText().equals("")
 						&& hierarchyFileField.getText() != null
 						&& !hierarchyFileField.getText().equals("")) {
+						genereaza();
 					JOptionPane.showMessageDialog(contentPane,
 							"The file was generated.");
 					showHierarchy.setEnabled(true);
@@ -284,13 +299,14 @@ public class ChooseFilesMenu extends JFrame {
 
 		showHierarchy.setBounds(236, 224, 161, 25);
 		showHierarchy.setEnabled(true);
-		// TODO : DE FACUT FALSE MAI SUS -> la final showHierarchy.setEnabled(false);
+		// TODO : DE FACUT FALSE MAI SUS -> la final
+		// showHierarchy.setEnabled(false);
 		// !!!
 		showHierarchy.addActionListener(new ActionListener() {
 			/* se va deschide fereastra numarul 2 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				XMLfile.setText("capra1.xml"); // TODO : DE STERS LA FINAL !!!
+				//XMLfile.setText("capra1.xml"); // TODO : DE STERS LA FINAL !!!
 				String s = XMLfile.getText();
 				int l = s.length();
 				/* daca fisierul este CEVA.xml este ok */
@@ -305,5 +321,58 @@ public class ChooseFilesMenu extends JFrame {
 			}
 		});
 		contentPane.add(showHierarchy);
+
+	}
+
+	public void genereaza() {
+		try {
+
+			// We need a Document
+			DocumentBuilderFactory dbfac = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = dbfac.newDocumentBuilder();
+			Document doc = docBuilder.newDocument();
+
+			Element root = doc.createElement("task");
+			doc.appendChild(root);
+
+			StringTokenizer st = new StringTokenizer(
+					multipleXMLsField.getText(), ";");
+			while (st.hasMoreTokens()) {
+				Element child = doc.createElement("inputFile");
+				child.setAttribute("name", st.nextToken().trim());
+				root.appendChild(child);
+			}
+
+			Element output = doc.createElement("outputFile");
+			output.setAttribute("name", "generated.xml");
+			root.appendChild(output);
+
+			// ///////////////
+			// Output the XML
+
+			// set up a transformer
+			TransformerFactory transfac = TransformerFactory.newInstance();
+			Transformer trans = transfac.newTransformer();
+			trans.setOutputProperty(OutputKeys.METHOD, "xml");
+			// trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			trans.setOutputProperty(OutputKeys.INDENT, "yes");
+
+			// create string from xml tree
+			StringWriter sw = new StringWriter();
+			StreamResult result = new StreamResult(sw);
+			DOMSource source = new DOMSource(doc);
+			trans.transform(source, result);
+			String xmlString = sw.toString();
+
+			// print xml
+			System.out.println("Here's the xml:\n\n" + xmlString);
+			BufferedWriter out = new BufferedWriter(new FileWriter("task.xml"));
+			out.write(xmlString);
+			out.close();
+			Runtime.getRuntime().exec( hierarchyFileField.getText() + " task.xml"); 
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 }

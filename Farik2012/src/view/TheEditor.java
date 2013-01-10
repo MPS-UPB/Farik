@@ -14,12 +14,15 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
+
 import org.xml.sax.SAXException;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Vector;
 
 /**
+ * 
  * Creaza cadrul celei de-a doua ferestre importante a aplicatiei ( cea de
  * editare ).
  */
@@ -27,20 +30,58 @@ import java.io.IOException;
 public class TheEditor extends JFrame {
 
 	private JPanel contentPane;
+
 	String pozaScanata;
+	int pagina = 0;
+	Vector<ImageData> pagesData;
+	public JPanel panel;
+	int nrPag = 0;
+
+	private class ImageData {
+		private String imagePath;
+		private String imageDirection;
+		private String imageId;
+
+		public ImageData(String path, String direction, String id) {
+			this.imagePath = path;
+			this.imageDirection = direction;
+			this.imageId = id;
+		}
+
+		private String getPath() {
+			return this.imagePath;
+		}
+
+		private String getDirection() {
+			return this.imageDirection;
+		}
+
+		private String getId() {
+			return this.imageId;
+		}
+
+		public String toString() {
+			return "[" + this.imagePath + "," + this.imageDirection + ","
+					+ this.imageId + "]";
+		}
+	}
 
 	/*
 	 * s = ceva.xml page_number = N, article = A, title = T, subtitle = S, body
 	 * = B, paragraph = P
 	 */
+
 	public TheEditor(String s) {
 
 		/* partea de DOM = Document Object Model */
 		/*
+		 * 
+		 * 
 		 * 1) Se vor adauga tab-uri cu atribut de numar de pagina si la
 		 * blocurile nemarcate. 2) Se vor reprezenta in interfata grafica
 		 * JComboBox-uri si JRadioButton-uri pentru fiecare bloc din xml 3)
 		 */
+
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
 		try {
@@ -58,13 +99,35 @@ public class TheEditor extends JFrame {
 		}
 
 		document.normalize();
-		afiseazaDOM(document);
+		// afiseazaDOM(document);
 
 		/*
 		 * elementul radacina al arborelui DOM ; chiar in acesta se afla
 		 * tag-urile care ne intereseaza pe noi
 		 */
 		Element root = document.getDocumentElement();
+
+		// vectorul de imagini care compune fisierul ierarhie
+
+		NodeList nl = document.getElementsByTagName("Document");
+		this.pagesData = new Vector<ImageData>();
+		for (int i = 0; i < nl.getLength(); i++) {
+			// Get element
+			Element element = (Element) nl.item(i);
+			NamedNodeMap atributes = element.getAttributes();
+
+			String direction = atributes.item(0).getTextContent();
+			String id = atributes.item(1).getTextContent();
+			String path = atributes.item(2).getTextContent();
+
+			ImageData image = new ImageData(path, direction, id);
+			this.pagesData.add(image);
+		}
+
+		nrPag = nl.getLength();
+
+		System.out.println(this.pagesData);
+
 		if (root.hasChildNodes() == false) { // nu avem niciun bloc
 			System.out.println("Documentul este gol.");
 		}
@@ -83,6 +146,7 @@ public class TheEditor extends JFrame {
 					// JComboBox-ul si JRadioButton-ul
 
 				} else {
+
 					// TODO : se preiau valorile pentru a se pozitiona
 					// JComboBox-ul si JRadioButton-ul
 
@@ -108,7 +172,9 @@ public class TheEditor extends JFrame {
 		// <<numele_vechi>>_corectat.xml
 
 		/* preluarea numelui pozei folosind numele xml-ului */
-		pozaScanata = s.substring(0, s.length() - 3) + "png"; // ceva.png
+		// pozaScanata = s.substring(0, s.length() - 3) + "png"; // ceva.png
+		// int pagina = 0;
+		pozaScanata = this.pagesData.elementAt(pagina).getPath();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		contentPane = new JPanel();
@@ -121,6 +187,7 @@ public class TheEditor extends JFrame {
 		jspLeft.setLayout(null);
 		jspLeft.setBorder(new LineBorder(Color.BLACK, 2));
 		jspLeft.setBounds(10, 65, 80, 540);
+
 		jspLeft.setBackground(ChooseFilesMenu.blueBack);
 
 		/* Panoul de sus */
@@ -160,22 +227,81 @@ public class TheEditor extends JFrame {
 		contentPane.add(jb);
 
 		/* panoul din partea dreapta a ecranului */
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.BLACK, 2));
 		panel.setBounds(100, 65, 894, 540);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		/* partea cu pozele din panoul din partea dreapta */
-		ImageScrolledPane scrollPan = new ImageScrolledPane(pozaScanata);
+		/*
+		 * ImageScrolledPane scrollPan = new ImageScrolledPane(pozaScanata);
+		 * scrollPan.setBounds(10, 5, 858, 530);
+		 * scrollPan.setVerticalScrollBarPolicy(22); // 22 = scroll vertical
+		 * scrollPan.width = 842; // mai mic decat 858, ca sa incapa si
+		 * scroll-ul // vertical scrollPan.height = 500;
+		 * 
+		 * scrollPan.setVisible(true); panel.add(scrollPan);
+		 */
+		this.LoadPage(panel, pagina);
+
+		/* Butoanele NEXT Page si Previous Page */
+		JButton next = new JButton("Next");
+		next.setBounds(540, 610, 80, 40);
+		next.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		next.setForeground(ChooseFilesMenu.blueBack);
+		next.setFont(new Font("Verdana", Font.BOLD, 16));
+		next.setBackground(Color.WHITE);
+		next.setFocusable(false);
+		next.addActionListener(new java.awt.event.ActionListener() {
+
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				// Execute when button is pressed
+				pagina++;
+				if (pagina == nrPag)
+					pagina--;
+				LoadPage(panel, pagina);
+				// panel.removeAll();
+				System.out.println("You clicked the button");
+			}
+		});
+		contentPane.add(next);
+
+		JButton prev = new JButton("Prev");
+		prev.setBounds(430, 610, 80, 40);
+		prev.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		prev.setForeground(ChooseFilesMenu.blueBack);
+		prev.setFont(new Font("Verdana", Font.BOLD, 16));
+		prev.setBackground(Color.WHITE);
+		prev.setFocusable(false);
+		prev.addActionListener(new java.awt.event.ActionListener() {
+
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				// Execute when button is pressed
+				pagina--;
+				if (pagina == -1)
+					pagina++;
+				LoadPage(panel, pagina);
+				// panel.removeAll();
+				System.out.println("You clicked the button");
+			}
+		});
+
+		contentPane.add(prev);
+	}
+
+	private void LoadPage(JPanel panel, int index) {
+		panel.removeAll();
+		String pagePath = ((ImageData) this.pagesData.get(index)).imagePath;
+		ImageScrolledPane scrollPan = new ImageScrolledPane(pagePath);
 		scrollPan.setBounds(10, 5, 858, 530);
 		scrollPan.setVerticalScrollBarPolicy(22); // 22 = scroll vertical
 		scrollPan.width = 842; // mai mic decat 858, ca sa incapa si scroll-ul
 		// vertical
 		scrollPan.height = 500;
-
 		scrollPan.setVisible(true);
 		panel.add(scrollPan);
+		panel.revalidate();
 	}
 
 	/* --------------------------------------------------------------------- */
@@ -184,10 +310,13 @@ public class TheEditor extends JFrame {
 	public void afiseazaDOM(Document document) {
 		Transformer transformer = null;
 		try {
+
 			transformer = TransformerFactory.newInstance().newTransformer();
+
 		} catch (TransformerConfigurationException e1) {
 			e1.printStackTrace();
 		} catch (TransformerFactoryConfigurationError e1) {
+
 			e1.printStackTrace();
 		}
 		Source source = new DOMSource(document);
