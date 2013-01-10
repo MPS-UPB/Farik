@@ -1,5 +1,8 @@
-Copy the executable to the folder where you have the other executables then the
-schema to the xml_schema folder.
+Pentru a genera fisiere de intare  pentru  hierarchy.exe 
+Trebuie modificat task_layout.xml corespunzator:  fiecare element inpuFile 
+reprezinta o imagine. api se executa fisierul generate_layout.bat.
+Sau puteti folosi direct un fisier deja facut de  mine numit rezultat_full_layout.xml.
 
-The inputFile elements are layout xml files which may or may not be enhanced
-with paging information.
+
+
+
