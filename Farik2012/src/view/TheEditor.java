@@ -19,6 +19,7 @@ import org.xml.sax.SAXException;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -36,6 +37,7 @@ public class TheEditor extends JFrame {
 	Vector<ImageData> pagesData;
 	public JPanel panel;
 	int nrPag = 0;
+	ArrayList<JComboBoxCoordinates> jcbList;
 
 	private class ImageData {
 		private String imagePath;
@@ -126,7 +128,7 @@ public class TheEditor extends JFrame {
 
 		nrPag = nl.getLength();
 
-		System.out.println(this.pagesData);
+//		System.out.println(this.pagesData);
 
 		if (root.hasChildNodes() == false) { // nu avem niciun bloc
 			System.out.println("Documentul este gol.");
@@ -136,30 +138,59 @@ public class TheEditor extends JFrame {
 		// parcurg toti fii radacinii
 		Node sibling = root.getFirstChild();
 		while (sibling != null) {
+//			System.out.println("copii radacina: " + sibling.getNodeName());
 			// daca nu pun conditia de mai jos e obligatoriu ca xml-urile sa fie
 			// cu tag-uri lipite </tag1><tag2>
-			if (sibling.getNodeName().equals("#text") == false) {
-				// poate fi doar ComposedBlock sau TextBlock
-				System.out.println(sibling.getNodeName());
-				if (sibling.getNodeName().equals("ComposedBlock") == false) {
-					// TODO : se preiau valorile pentru a se pozitiona
-					// JComboBox-ul si JRadioButton-ul
-
-				} else {
-
-					// TODO : se preiau valorile pentru a se pozitiona
-					// JComboBox-ul si JRadioButton-ul
-
-					// TODO : i se creeza lui TextBlock un parinte ComposedBlock
-					// avand type="page_number"
-
-				}
+			if (sibling.getNodeName().equals("#text") == false ) {
+				// poate fi doar ComposedBlock sau TextBlock 
+					if (sibling.getNodeName().equals("ComposedBlock") == false) {
+						// TODO : se preiau valorile pentru a se pozitiona
+						// JComboBox-ul si JRadioButton-ul
+	
+					} else {
+						// TODO : se preiau valorile pentru a se pozitiona
+						// JComboBox-ul si JRadioButton-ul
+	
+						// TODO : i se creeza lui TextBlock un parinte ComposedBlock
+						// avand type="page_number"
+	
+					}
 			}
 
 			sibling = sibling.getNextSibling();
 
 		}
-
+		
+		// iau toate elementele xml-ului care sunt copii ai elementului hierarchy_blocks
+		NodeList elementsList = document.getElementsByTagName("hierarchy_blocks");
+		NodeList hierarchyNodeElements = null;
+		if( elementsList.getLength()==1) {
+			hierarchyNodeElements = elementsList.item(0).getChildNodes();
+		}
+		
+		for( int i=0; i<hierarchyNodeElements.getLength(); ++i) {
+			NodeList childList = hierarchyNodeElements.item(i).getChildNodes();
+			for( int j=0; j<childList.getLength(); ++j) {
+				NodeList composedBlockComponents = childList.item(j).getChildNodes();
+				for( int k=0; k<composedBlockComponents.getLength(); ++k ) {
+					if( !composedBlockComponents.item(k).getNodeName().equals("#text")) {
+						NamedNodeMap nodeAttr = composedBlockComponents.item(k).getAttributes();
+						String type = childList.item(j).getAttributes().getNamedItem("type").getNodeValue();
+						int left = Integer.parseInt(nodeAttr.getNamedItem("left").getNodeValue());
+						int right = Integer.parseInt(nodeAttr.getNamedItem("right").getNodeValue());
+						int top = Integer.parseInt(nodeAttr.getNamedItem("top").getNodeValue());
+						int bottom = Integer.parseInt(nodeAttr.getNamedItem("bottom").getNodeValue());
+						if( jcbList==null ) {
+							jcbList = new ArrayList<JComboBoxCoordinates>();
+						}
+						jcbList.add(new JComboBoxCoordinates(type, left, right, top, bottom));
+						
+					}
+				}
+			}
+			
+		}
+		
 		// TODO : partea de afisare a JComboBox-urilor in functie de
 		// JRadioButton-ul selectat
 
@@ -196,14 +227,12 @@ public class TheEditor extends JFrame {
 		jpUp.setBorder(new LineBorder(Color.BLACK, 2));
 		jpUp.setBounds(100, 15, 852, 40);
 		jpUp.setBackground(ChooseFilesMenu.blueBack);
-
-		/* ComboBox pentru panoul din stanga */
-		String values[] = { "  N", "  A", "  T", "  S", "  B", "  P" };
-		JComboBox jcb = new JComboBox(values);
-		jcb.setBackground(Color.WHITE);
-		jcb.setForeground(Color.BLACK);
-		jcb.setBounds(14, 55, 52, 28);
-		jcb.setSelectedItem("  P");
+		
+		if( pagina==0 ) {
+			for( JComboBoxCoordinates jcbC : jcbList ) {
+				jspLeft.add(jcbC.getComboBox());
+			}
+		}
 
 		/* RadioButton pentru panoul de sus */
 		JRadioButton jrb = new JRadioButton();
@@ -211,7 +240,7 @@ public class TheEditor extends JFrame {
 		jrb.setBackground(ChooseFilesMenu.blueBack);
 
 		jpUp.add(jrb);
-		jspLeft.add(jcb);
+//		jspLeft.add(jcb);
 
 		contentPane.add(jspLeft);
 		contentPane.add(jpUp);

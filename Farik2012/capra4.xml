@@ -3,7 +3,7 @@
 <hierarchy>
  <hierarchy_docs>
   <Document image="capra1.png" direction="descending" id="img1"/>
-  <Document image="capra2.png" direction="descending2" id="img2"/>
+  <Document image="capra2.png" direction="descending" id="img2"/>
  </hierarchy_docs>
  
  <hierarchy_blocks>
@@ -39,7 +39,6 @@
 			<String>mijlociu</String>
 			<String>dau</String>
 		</TextLine>
-      
 		<TextLine left="8" right="827" top="146" bottom="175">
 			<String>prin</String>
 			<String>bat</String>
