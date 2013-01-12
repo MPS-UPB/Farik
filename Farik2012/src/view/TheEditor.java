@@ -249,7 +249,7 @@ public class TheEditor extends JFrame {
 				}
 			});
 			jspLeft.add(localCombobox);
-			localCombobox.setVisible(false);
+//			localCombobox.setVisible(false);
 		}
 		
 		for( JComboBoxCoordinates jcbC : jcbList ) {
