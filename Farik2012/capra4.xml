@@ -3,7 +3,7 @@
 <hierarchy>
  <hierarchy_docs>
   <Document image="capra1.png" direction="descending" id="img1"/>
- <!-- <Document image="capra2.png" direction="descending" id="img2"/> -->
+  <Document image="capra2.png" direction="descending" id="img2"/>
  </hierarchy_docs>
  
  <hierarchy_blocks>
@@ -73,6 +73,90 @@
 		</TextLine>
      </TextBlock>
     </ComposedBlock>
-   </ComposedBlock>
+   
+		<ComposedBlock  type="paragraph">
+			<TextBlock refid="img2" left="107" right="572" top="1" bottom="30">
+				<TextLine left="107" right="572" top="1" bottom="30">
+				  <String>Intr-o</String>
+				  <String>zi,</String>
+				  <String>capra</String>
+				  <String>cheama</String>
+				  <String>iezii</String>
+				  <String>de</String>
+				  <String>pe-afara</String>
+				  <String>si</String>
+				  <String>le</String>
+				  <String>zice:</String>
+				</TextLine>
+				<TextLine left="106" right="821" top="34" bottom="60">
+				  <String>-</String>
+				  <String>Dragii</String>
+				  <String>mamei</String>
+				  <String>copilasi!</String>
+				  <String>Eu</String>
+				  <String>ma</String>
+				  <String>duc</String>
+				  <String>in</String>
+				  <String>padure</String>
+				  <String>ca</String>
+				  <String>sa</String>
+				  <String>mai</String>
+				  <String>aduc</String>
+				  <String>ceva</String>
+				  <String>de-a</String>
+				</TextLine>
+				<TextLine left="2" right="821" top="62" bottom="90">
+				  <String>mancarii.</String>
+				  <String>Dar</String>
+				  <String>voi</String>
+				  <String>incuieti</String>
+				  <String>usa</String>
+				  <String>dupa</String>
+				  <String>mine,</String>
+				  <String>ascultati</String>
+				  <String>unul</String>
+				  <String>de</String>
+				  <String>altul,</String>
+				  <String>si</String>
+				  <String>sa</String>
+				  <String>nu</String>
+				  <String>cumva</String>
+				  <String>sa</String>
+				</TextLine>
+				<TextLine left="2" right="821" top="93" bottom="119">
+				  <String>deschideti</String>
+				  <String>pana</String>
+				  <String>ce</String>
+				  <String>nu-ti</String>
+				  <String>auzi</String>
+				  <String>glasul</String>
+				  <String>meu.</String>
+				  <String>Cand</String>
+				  <String>voi</String>
+				  <String>veni</String>
+				  <String>eu,</String>
+				  <String>am</String>
+				  <String>sa</String>
+				  <String>va</String>
+				  <String>dau</String>
+				  <String>de</String>
+				  <String>stire</String>
+				  <String>ca</String>
+				  <String>sa</String>
+				</TextLine>
+				<TextLine left="2" right="340" top="123" bottom="149">
+				  <String>ma</String>
+				  <String>cunoasteti,</String>
+				  <String>si</String>
+				  <String>am</String>
+				  <String>sa</String>
+				  <String>va</String>
+				  <String>spun</String>
+				  <String>asa:</String>
+				</TextLine>
+			</TextBlock>
+		</ComposedBlock>
+	</ComposedBlock>
+   
  </hierarchy_blocks>
 </hierarchy>

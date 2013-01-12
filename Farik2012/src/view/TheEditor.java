@@ -236,22 +236,24 @@ public class TheEditor extends JFrame {
 		jpUp.setBounds(100, 15, 852, 40);
 		jpUp.setBackground(ChooseFilesMenu.blueBack);
 		
-		if( pagina==0 ) {
-			for( final JComboBoxCoordinates jcbC : jcbList ) {
-				if(jcbC.getId()==1) {
-					JComboBox localCombobox = jcbC.getComboBox();
-					localCombobox.addActionListener(new ActionListener() {
-						
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							// TODO Auto-generated method stub
-							jcbC.setNode();
-							System.out.println("Nodul modificat : " + jcbC.getNode().getNodeValue());
-						}
-					});
-					jspLeft.add(localCombobox);
+		//afisam JComboBox-urile
+		for( final JComboBoxCoordinates jcbC : jcbList ) {
+			JComboBox localCombobox = jcbC.getComboBox();
+			localCombobox.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					jcbC.setNode();
+					System.out.println("Nodul modificat : " + jcbC.getNode().getNodeValue());
 				}
-			}
+			});
+			jspLeft.add(localCombobox);
+			localCombobox.setVisible(false);
+		}
+		
+		for( JComboBoxCoordinates jcbC : jcbList ) {
+			System.out.println("pagina: " + pagina);
 		}
 
 		/* RadioButton pentru panoul de sus */
