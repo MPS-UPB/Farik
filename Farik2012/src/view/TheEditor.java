@@ -36,6 +36,7 @@ public class TheEditor extends JFrame {
 
 	String pozaScanata;
 	int pagina = 0;
+	int paginaCurenta;
 	Vector<ImageData> pagesData;
 	public JPanel panel;
 	int nrPag = 0;
@@ -236,26 +237,6 @@ public class TheEditor extends JFrame {
 		jpUp.setBounds(100, 15, 852, 40);
 		jpUp.setBackground(ChooseFilesMenu.blueBack);
 		
-		//afisam JComboBox-urile
-		for( final JComboBoxCoordinates jcbC : jcbList ) {
-			JComboBox localCombobox = jcbC.getComboBox();
-			localCombobox.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					jcbC.setNode();
-					System.out.println("Nodul modificat : " + jcbC.getNode().getNodeValue());
-				}
-			});
-			jspLeft.add(localCombobox);
-//			localCombobox.setVisible(false);
-		}
-		
-		for( JComboBoxCoordinates jcbC : jcbList ) {
-			System.out.println("pagina: " + pagina);
-		}
-
 		/* RadioButton pentru panoul de sus */
 //		JRadioButton jrb = new JRadioButton();
 //		jrb.setBounds(40, 10, 20, 20);
@@ -353,14 +334,48 @@ public class TheEditor extends JFrame {
 		this.LoadPage(panel,pagina);
 	
 		if(pagina == 0) {
+			paginaCurenta = 0;
 			prev.setEnabled(false);
 		}
 		if( pagina == nrPag-1) {
+			paginaCurenta = nrPag-1;
 			next.setEnabled(false);
 		}
+		
+		//afisam JComboBox-urile
+		for( final JComboBoxCoordinates jcbC : jcbList ) {
+			JComboBox localCombobox = jcbC.getComboBox();
+			localCombobox.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					jcbC.setNode();
+					System.out.println("Nodul modificat : " + jcbC.getNode().getNodeValue());
+				}
+			});
+			jspLeft.add(localCombobox);
+			if( jcbC.getId()==1) {
+				localCombobox.setVisible(true);
+			}
+			else  {
+				localCombobox.setVisible(false);
+			}
+		}
+		
 	}
+	
+	
 
 	private void LoadPage(JPanel panel, int index) {
+		for( JComboBoxCoordinates jcbC : jcbList) {
+			if( jcbC.getId()-1==index) {
+				jcbC.getComboBox().setVisible(true);
+			}
+			else {
+				jcbC.getComboBox().setVisible(false);
+			}
+		}
 		panel.removeAll();
 		String pagePath = ((ImageData) this.pagesData.get(index)).imagePath;
 		ImageScrolledPane scrollPan = new ImageScrolledPane(pagePath);
