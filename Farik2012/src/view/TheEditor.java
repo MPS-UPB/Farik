@@ -18,6 +18,8 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -38,6 +40,9 @@ public class TheEditor extends JFrame {
 	public JPanel panel;
 	int nrPag = 0;
 	ArrayList<JComboBoxCoordinates> jcbList;
+	
+	public static JButton next = new JButton("Next");
+	public static JButton prev = new JButton("Prev");
 
 	private class ImageData {
 		private String imagePath;
@@ -101,7 +106,7 @@ public class TheEditor extends JFrame {
 		}
 
 		document.normalize();
-		// afiseazaDOM(document);
+//		 afiseazaDOM(document);
 
 		/*
 		 * elementul radacina al arborelui DOM ; chiar in acesta se afla
@@ -175,6 +180,9 @@ public class TheEditor extends JFrame {
 				for( int k=0; k<composedBlockComponents.getLength(); ++k ) {
 					if( !composedBlockComponents.item(k).getNodeName().equals("#text")) {
 						NamedNodeMap nodeAttr = composedBlockComponents.item(k).getAttributes();
+						String id = nodeAttr.getNamedItem("refid").getNodeValue();
+						char aux = id.charAt(id.length()-1);
+						int pageId = Character.getNumericValue(aux);
 						String type = childList.item(j).getAttributes().getNamedItem("type").getNodeValue();
 						int left = Integer.parseInt(nodeAttr.getNamedItem("left").getNodeValue());
 						int right = Integer.parseInt(nodeAttr.getNamedItem("right").getNodeValue());
@@ -183,8 +191,8 @@ public class TheEditor extends JFrame {
 						if( jcbList==null ) {
 							jcbList = new ArrayList<JComboBoxCoordinates>();
 						}
-						jcbList.add(new JComboBoxCoordinates(type, left, right, top, bottom));
-						
+						Node tmp = childList.item(j).getAttributes().getNamedItem("type");
+						jcbList.add(new JComboBoxCoordinates(tmp, pageId, type, left, right, top, bottom));
 					}
 				}
 			}
@@ -229,17 +237,42 @@ public class TheEditor extends JFrame {
 		jpUp.setBackground(ChooseFilesMenu.blueBack);
 		
 		if( pagina==0 ) {
-			for( JComboBoxCoordinates jcbC : jcbList ) {
-				jspLeft.add(jcbC.getComboBox());
+			for( final JComboBoxCoordinates jcbC : jcbList ) {
+				if(jcbC.getId()==1) {
+					JComboBox localCombobox = jcbC.getComboBox();
+					localCombobox.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							jcbC.setNode();
+							System.out.println("Nodul modificat : " + jcbC.getNode().getNodeValue());
+						}
+					});
+					jspLeft.add(localCombobox);
+				}
 			}
 		}
 
 		/* RadioButton pentru panoul de sus */
-		JRadioButton jrb = new JRadioButton();
-		jrb.setBounds(40, 10, 20, 20);
-		jrb.setBackground(ChooseFilesMenu.blueBack);
-
-		jpUp.add(jrb);
+//		JRadioButton jrb = new JRadioButton();
+//		jrb.setBounds(40, 10, 20, 20);
+//		jrb.setBackground(ChooseFilesMenu.blueBack);
+//
+//		jpUp.add(jrb);
+		
+		JButton generate = new JButton("Generate");
+		generate.setBounds(40, 10, 100, 20);
+		generate.setBackground(Color.GREEN);
+		final Document document2 = document;
+		generate.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				afiseazaDOM(document2);
+			}
+		});
+		jpUp.add(generate);
 //		jspLeft.add(jcb);
 
 		contentPane.add(jspLeft);
@@ -275,7 +308,7 @@ public class TheEditor extends JFrame {
 		this.LoadPage(panel, pagina);
 
 		/* Butoanele NEXT Page si Previous Page */
-		JButton next = new JButton("Next");
+		next = new JButton("Next");
 		next.setBounds(540, 610, 80, 40);
 		next.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		next.setForeground(ChooseFilesMenu.blueBack);
@@ -283,20 +316,19 @@ public class TheEditor extends JFrame {
 		next.setBackground(Color.WHITE);
 		next.setFocusable(false);
 		next.addActionListener(new java.awt.event.ActionListener() {
-
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				// Execute when button is pressed
-				pagina++;
-				if (pagina == nrPag)
-					pagina--;
-				LoadPage(panel, pagina);
-				// panel.removeAll();
-				System.out.println("You clicked the button");
-			}
-		});
+	       public void actionPerformed(java.awt.event.ActionEvent e) {
+	    	   pagina++;
+           		LoadPage(panel, pagina);
+           		prev.setEnabled(true);
+           		if(pagina == nrPag - 1){
+           			JButton button = (JButton)e.getSource();
+           			button.setEnabled(false);
+           		}
+           }
+       });  
 		contentPane.add(next);
 
-		JButton prev = new JButton("Prev");
+		prev = new JButton("Prev");
 		prev.setBounds(430, 610, 80, 40);
 		prev.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		prev.setForeground(ChooseFilesMenu.blueBack);
@@ -304,19 +336,26 @@ public class TheEditor extends JFrame {
 		prev.setBackground(Color.WHITE);
 		prev.setFocusable(false);
 		prev.addActionListener(new java.awt.event.ActionListener() {
-
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				// Execute when button is pressed
 				pagina--;
-				if (pagina == -1)
-					pagina++;
 				LoadPage(panel, pagina);
-				// panel.removeAll();
-				System.out.println("You clicked the button");
+				next.setEnabled(true);
+				if(pagina == 0){
+					JButton button = (JButton)e.getSource();
+					button.setEnabled(false);
+				}
 			}
-		});
-
+		});  	
+	
 		contentPane.add(prev);
+		this.LoadPage(panel,pagina);
+	
+		if(pagina == 0) {
+			prev.setEnabled(false);
+		}
+		if( pagina == nrPag-1) {
+			next.setEnabled(false);
+		}
 	}
 
 	private void LoadPage(JPanel panel, int index) {

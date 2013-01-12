@@ -3,7 +3,7 @@
 <hierarchy>
  <hierarchy_docs>
   <Document image="capra1.png" direction="descending" id="img1"/>
-  <Document image="capra2.png" direction="descending" id="img2"/>
+ <!-- <Document image="capra2.png" direction="descending" id="img2"/> -->
  </hierarchy_docs>
  
  <hierarchy_blocks>
