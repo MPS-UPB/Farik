@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<hierarchy>
+ <hierarchy_docs>
+  <Document image="capra1.png" direction="descending" id="img1"/>
+  <Document image="capra2.png" direction="descending" id="img2"/>
+  <Document image="capra3.png" direction="descending" id="img3"/>
+ </hierarchy_docs>
+ 
+ <hierarchy_blocks>
+  <ComposedBlock type="article">
+    <ComposedBlock  type="title">
+     <TextBlock refid="img1" left="278" right="555" top="15" bottom="38">
+      <TextLine left="278" right="555" top="15" bottom="38">
+		<String>CAPRA</String>
+		<String>CU</String>
+		<String>TREI</String>
+		<String>IEZI</String>
+      </TextLine>
+     </TextBlock>
+    </ComposedBlock>
+    
+    <ComposedBlock  type="paragraph">
+     <TextBlock refid="img1" left="8" right="827" top="120" bottom="204">
+		<TextLine left="112" right="827" top="120" bottom="145">
+			<String>Era</String>
+			<String>odata</String>
+			<String>o</String>
+			<String>capra</String>
+			<String>care</String>
+			<String>avea</String>
+			<String>trei</String>
+			<String>iezi.</String>
+			<String>Iedul</String>
+			<String>cel</String>
+			<String>mare</String>
+			<String>si</String>
+			<String>cu</String>
+			<String>cel</String>
+			<String>mijlociu</String>
+			<String>dau</String>
+		</TextLine>
+		<TextLine left="8" right="827" top="146" bottom="175">
+			<String>prin</String>
+			<String>bat</String>
+			<String>de</String>
+			<String>obraznici</String>
+			<String>ce</String>
+			<String>erau;</String>
+			<String>iara</String>
+			<String>cel</String>
+			<String>mic</String>
+			<String>era</String>
+			<String>harnic</String>
+			<String>si</String>
+			<String>cuminte.</String>
+			<String>Vorba</String>
+			<String>ceea:</String>
+			<String>"Sunt</String>
+		</TextLine>
+		<TextLine left="8" right="543" top="178" bottom="204">
+			<String>cinci</String>
+			<String>degete</String>
+			<String>la</String>
+			<String>o</String>
+			<String>mana</String>
+			<String>si</String>
+			<String>nu</String>
+			<String>seamana</String>
+			<String>toate</String>
+			<String>unul</String>
+			<String>cu</String>
+			<String>altul".</String>
+		</TextLine>
+     </TextBlock>
+    </ComposedBlock>
+   
+		<ComposedBlock  type="paragraph">
+			<TextBlock refid="img2" left="107" right="572" top="1" bottom="30">
+				<TextLine left="107" right="572" top="1" bottom="30">
+				  <String>Intr-o</String>
+				  <String>zi,</String>
+				  <String>capra</String>
+				  <String>cheama</String>
+				  <String>iezii</String>
+				  <String>de</String>
+				  <String>pe-afara</String>
+				  <String>si</String>
+				  <String>le</String>
+				  <String>zice:</String>
+				</TextLine>
+				<TextLine left="106" right="821" top="34" bottom="60">
+				  <String>-</String>
+				  <String>Dragii</String>
+				  <String>mamei</String>
+				  <String>copilasi!</String>
+				  <String>Eu</String>
+				  <String>ma</String>
+				  <String>duc</String>
+				  <String>in</String>
+				  <String>padure</String>
+				  <String>ca</String>
+				  <String>sa</String>
+				  <String>mai</String>
+				  <String>aduc</String>
+				  <String>ceva</String>
+				  <String>de-a</String>
+				</TextLine>
+				<TextLine left="2" right="821" top="62" bottom="90">
+				  <String>mancarii.</String>
+				  <String>Dar</String>
+				  <String>voi</String>
+				  <String>incuieti</String>
+				  <String>usa</String>
+				  <String>dupa</String>
+				  <String>mine,</String>
+				  <String>ascultati</String>
+				  <String>unul</String>
+				  <String>de</String>
+				  <String>altul,</String>
+				  <String>si</String>
+				  <String>sa</String>
+				  <String>nu</String>
+				  <String>cumva</String>
+				  <String>sa</String>
+				</TextLine>
+				<TextLine left="2" right="821" top="93" bottom="119">
+				  <String>deschideti</String>
+				  <String>pana</String>
+				  <String>ce</String>
+				  <String>nu-ti</String>
+				  <String>auzi</String>
+				  <String>glasul</String>
+				  <String>meu.</String>
+				  <String>Cand</String>
+				  <String>voi</String>
+				  <String>veni</String>
+				  <String>eu,</String>
+				  <String>am</String>
+				  <String>sa</String>
+				  <String>va</String>
+				  <String>dau</String>
+				  <String>de</String>
+				  <String>stire</String>
+				  <String>ca</String>
+				  <String>sa</String>
+				</TextLine>
+				<TextLine left="2" right="340" top="123" bottom="149">
+				  <String>ma</String>
+				  <String>cunoasteti,</String>
+				  <String>si</String>
+				  <String>am</String>
+				  <String>sa</String>
+				  <String>va</String>
+				  <String>spun</String>
+				  <String>asa:</String>
+				</TextLine>
+			</TextBlock>
+		</ComposedBlock>
+			
+		<ComposedBlock  type="paragraph">
+			<TextBlock refid="img3" left="265" right="497" top="5" bottom="321">
+				<TextLine left="265" right="431" top="5" bottom="29">
+				  <String>Trei</String>
+				  <String>iezi</String>
+				  <String>cucuieti,</String>
+				</TextLine>
+				<TextLine left="265" right="472" top="34" bottom="57">
+				  <String>Usa</String>
+				  <String>mamei</String>
+				  <String>descuieti!</String>
+				</TextLine>
+				<TextLine left="265" right="497" top="62" bottom="83">
+				  <String>Ca</String>
+				  <String>mama</String>
+				  <String>v-aduce</String>
+				  <String>voua:</String>
+				</TextLine>
+				<TextLine left="265" right="408" top="94" bottom="115">
+				  <String>Frunze-n</String>
+				  <String>buze,</String>
+				</TextLine>
+				<TextLine left="265" right="387" top="124" bottom="148">
+				  <String>Lapte-n</String>
+				  <String>tate,</String>
+				</TextLine>
+				<TextLine left="265" right="394" top="153" bottom="173">
+				  <String>Drob</String>
+				  <String>de</String>
+				  <String>sare</String>
+				</TextLine>
+				<TextLine left="265" right="370" top="178" bottom="206">
+				  <String>In</String>
+				  <String>spinare,</String>
+				</TextLine>
+				<TextLine left="265" right="346" top="211" bottom="235">
+				  <String>Malaies</String>
+				</TextLine>
+				<TextLine left="265" right="376" top="238" bottom="265">
+				  <String>In</String>
+				  <String>calcaies,</String>
+				</TextLine>
+				<TextLine left="265" right="395" top="271" bottom="296">
+				  <String>Smoc</String>
+				  <String>de</String>
+				  <String>flori</String>
+				</TextLine>
+				<TextLine left="265" right="384" top="303" bottom="321">
+				  <String>Pe</String>
+				  <String>subsuori.</String>
+				</TextLine>
+			  </TextBlock>
+		</ComposedBlock>
+		
+		<ComposedBlock  type="paragraph">
+			<TextBlock refid="img3" left="768" right="779" top="331" bottom="351">
+				<TextLine left="768" right="779" top="331" bottom="351">
+					<String>1</String>
+				</TextLine>
+			</TextBlock>
+		</ComposedBlock>
+		
+	</ComposedBlock>
+   
+ </hierarchy_blocks>
+</hierarchy>

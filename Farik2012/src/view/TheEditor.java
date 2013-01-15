@@ -34,7 +34,7 @@ public class TheEditor extends JFrame {
 
 	private JPanel contentPane;
 
-	String pozaScanata;
+	String pozaScanata, fisierEditat;
 	int pagina = 0;
 	int paginaCurenta;
 	Vector<ImageData> pagesData;
@@ -105,7 +105,10 @@ public class TheEditor extends JFrame {
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-
+		
+	//	String x = s;
+		fisierEditat = s.replace(".xml", "_corectat.xml");
+		
 		document.normalize();
 //		 afiseazaDOM(document);
 
@@ -405,7 +408,7 @@ public class TheEditor extends JFrame {
 			e1.printStackTrace();
 		}
 		Source source = new DOMSource(document);
-		Result output = new StreamResult(System.out);
+		Result output = new StreamResult(fisierEditat);
 		try {
 			transformer.transform(source, output);
 		} catch (TransformerException e) {
